@@ -33,7 +33,7 @@ public class Mesa {
 
 
     public enum estadoMesa {
-        Libre, Ocupada, Sucia, Reservada
+        LIBRE, OCUPADA, SUCIA, RESERVADA
     }
 
     // Getters and Setters
