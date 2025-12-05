@@ -37,7 +37,7 @@ public class Pedido {
     private estadoPago estadoPago;
 
     public enum estadoPago {
-        Pendiente, Pagado, Cancelado
+        PENDIENTE, PAGADO, CANCELADO
     }
 
     // getters y setters
