@@ -40,10 +40,10 @@ public class PedidoController {
         Pedido pedido = pedidoService.buscarPorId(id);
         if (pedido != null) {
 
-            pedido.setEstadoPago(Pedido.estadoPago.Cancelado);
+            pedido.setEstadoPago(Pedido.estadoPago.CANCELADO);
 
             Mesa mesa = pedido.getMesa();
-            mesa.setEstado(Mesa.estadoMesa.Libre);
+            mesa.setEstado(Mesa.estadoMesa.LIBRE);
 
             pedidoService.guardarPedido(pedido);
         }

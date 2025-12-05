@@ -39,17 +39,17 @@ public class DetallePagoService {
         Pedido pedido = pedidoRepo.findById(idPedido).orElse(null);
         if (pedido != null) {
             if (totalPagado >= pedido.getTotal()) {
-                pedido.setEstadoPago(Pedido.estadoPago.Pagado);
+                pedido.setEstadoPago(Pedido.estadoPago.PAGADO);
                 pedido.setFechaHoraCierre(LocalDateTime.now());
 
                 // Liberar mesa
                 Mesa mesa = pedido.getMesa();
                 if (mesa != null) {
-                    mesa.setEstado(Mesa.estadoMesa.Libre);
+                    mesa.setEstado(Mesa.estadoMesa.LIBRE);
                     mesaRepo.save(mesa);
                 }
             } else {
-                pedido.setEstadoPago(Pedido.estadoPago.Pendiente);
+                pedido.setEstadoPago(Pedido.estadoPago.PENDIENTE);
             }
             pedidoRepo.save(pedido);
         }
@@ -80,15 +80,15 @@ public class DetallePagoService {
             Pedido pedido = pedidoRepo.findById(idPedido).orElse(null);
             if (pedido != null) {
                 if (totalPagado >= pedido.getTotal()) {
-                    pedido.setEstadoPago(Pedido.estadoPago.Pagado);
+                    pedido.setEstadoPago(Pedido.estadoPago.PAGADO);
                     pedido.setFechaHoraCierre(LocalDateTime.now());
                     Mesa mesa = pedido.getMesa();
                     if (mesa != null) {
-                        mesa.setEstado(Mesa.estadoMesa.Libre);
+                        mesa.setEstado(Mesa.estadoMesa.LIBRE);
                         mesaRepo.save(mesa);
                     }
                 } else {
-                    pedido.setEstadoPago(Pedido.estadoPago.Pendiente);
+                    pedido.setEstadoPago(Pedido.estadoPago.PENDIENTE);
                 }
                 pedidoRepo.save(pedido);
             }

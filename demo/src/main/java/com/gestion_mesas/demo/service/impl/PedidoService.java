@@ -21,7 +21,7 @@ public class PedidoService implements IPedidoService {
     }
 
     public Pedido obtenerPedidoActivo(Long idMesa) {
-        return repository.findByMesaIdMesaAndEstadoPago(idMesa, Pedido.estadoPago.Pendiente).orElse(null);
+        return repository.findByMesaIdMesaAndEstadoPago(idMesa, Pedido.estadoPago.PENDIENTE).orElse(null);
     }
 
     public void guardarPedido(Mesa mesa) {
@@ -29,9 +29,9 @@ public class PedidoService implements IPedidoService {
         nuevo.setFechaHoraApertura(LocalDateTime.now());
         nuevo.setMesa(mesa);
         nuevo.setTotal(0.0);
-        nuevo.setEstadoPago(Pedido.estadoPago.Pendiente);
+        nuevo.setEstadoPago(Pedido.estadoPago.PENDIENTE);
 
-        mesa.setEstado(Mesa.estadoMesa.Ocupada);
+        mesa.setEstado(Mesa.estadoMesa.OCUPADA);
 
         repository.save(nuevo);
     }
