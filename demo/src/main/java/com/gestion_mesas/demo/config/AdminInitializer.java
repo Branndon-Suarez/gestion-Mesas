@@ -11,17 +11,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class AdminInitializer {
+    private static final String ROL_ADMIN = "ADMIN";
+    private static final String ROL_EMPLEADO = "EMPLEADO";
+
     @Bean
     CommandLineRunner initRolesAndAdmin(RolRepository rolRepo, UsuarioRepository userRepo, PasswordEncoder encoder) {
         return args -> {
 
             // Crear rol ADMIN si no existe
-            if (rolRepo.findByNombre("ADMIN").isEmpty()) {
-                rolRepo.save(new Rol(null, "ADMIN"));
+            if (rolRepo.findByNombre(ROL_ADMIN).isEmpty()) {
+                rolRepo.save(new Rol(null, ROL_ADMIN));
             }
 
-            if (rolRepo.findByNombre("EMPLEADO").isEmpty()) {
-                rolRepo.save(new Rol(null, "EMPLEADO"));
+            if (rolRepo.findByNombre(ROL_EMPLEADO).isEmpty()) {
+                rolRepo.save(new Rol(null, ROL_EMPLEADO));
             }
 
             // Crear usuario ADMIN si no existe
@@ -29,7 +32,7 @@ public class AdminInitializer {
                 Usuario admin = new Usuario();
                 admin.setUsername("admin");
                 admin.setPassword(encoder.encode("admin123"));
-                admin.setRol(rolRepo.findByNombre("ADMIN").get());
+                admin.setRol(rolRepo.findByNombre(ROL_ADMIN).get());
                 userRepo.save(admin);
                 System.out.println("Usuario ADMIN creado: admin / admin123");
             }
