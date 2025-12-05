@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/productos")
 public class ProductoController {
+    private static final String REDIRECT_LISTAR = "redirect:/productos/listar";
     private final ProductoService productoService;
 
     public ProductoController(ProductoService productoService) {
@@ -39,7 +40,7 @@ public class ProductoController {
             return "producto/formGuardar";
         }
         productoService.guardarProducto(producto);
-        return "redirect:/productos/listar";
+        return REDIRECT_LISTAR;
     }
 
     // Mostrar formulario de editar producto
@@ -47,7 +48,7 @@ public class ProductoController {
     public String mostrarFormActualizar(@PathVariable Long id, Model model) {
         Producto producto = productoService.buscarPorId(id);
         if (producto == null) {
-            return "redirect:/productos/listar";
+            return REDIRECT_LISTAR;
         }
         model.addAttribute("producto", producto);
         return "producto/formAct";
@@ -61,13 +62,13 @@ public class ProductoController {
             return "producto/formAct";
         }
         productoService.guardarProducto(producto);
-        return "redirect:/productos/listar";
+        return REDIRECT_LISTAR;
     }
 
     // Eliminar producto
     @PostMapping("/eliminar/{id}")
     public String eliminarProducto(@PathVariable Long id) {
         productoService.eliminarProducto(id);
-        return "redirect:/productos/listar";
+        return REDIRECT_LISTAR;
     }
 }
