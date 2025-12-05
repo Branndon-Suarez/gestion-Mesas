@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagos del Pedido</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<h1 class="text-center">💰 Pagos del Pedido</h1>
+<div th:replace="~{layout/navbar :: navbar}"></div>
+
+<main class="container mt-4">
+
+    <h2>Pedido N° <span th:text="${pedido.idPedido}"></span></h2>
+    <h4>Total del Pedido: $<span th:text="${pedido.total}"></span></h4>
+
+    <hr>
+
+    <div class="mb-3">
+        <a th:href="@{/pagos/nuevo/{id}(id=${pedido.idPedido})}" class="btn btn-success">
+            Registrar Pago
+        </a>
+
+        <a th:href="@{/detalle-pedido/listar/{idPedido}(idPedido=${pedido.idPedido})}"
+           class="btn btn-secondary">
+            Volver al Pedido
+        </a>
+    </div>
+
+    <h4>Pagos Realizados</h4>
+
+    <table class="table table-bordered mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Fecha y hora</th>
+            <th>Monto</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="p : ${listaPagos}">
+            <td th:text="${p.idDetallePago}"></td>
+            <td th:text="${#temporals.format(p.fechaPago, 'yyyy-MM-dd HH:mm')}"></td>
+            <td>$<span th:text="${p.montoPago}"></span></td>
+            <td>
+                <a th:href="@{/pagos/eliminar/{idPago}(idPago=${p.idDetallePago})}"
+                   class="btn btn-danger btn-sm">
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h4>Total Pagado: <span class="text-success">$<span th:text="${totalPagado}"></span></span></h4>
+    <h4>Faltante: <span class="text-danger">$<span th:text="${faltante}"></span></span></h4>
+
+</main>
+
+</body>
+</html>

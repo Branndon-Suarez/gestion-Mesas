@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Mesa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+<h2 class="mb-3">Actualizar Mesa</h2>
+
+<form th:action="@{/mesas/actualizar}" method="post" th:object="${mesaUpdateDTO}">
+
+    <!-- ID oculto -->
+    <input type="hidden" th:field="*{idMesa}"/>
+
+    <div class="mb-3">
+        <label>Número de mesa:</label>
+        <input type="text" th:field="*{numero}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Capacidad:</label>
+        <input type="text" th:field="*{capacidad}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Estado:</label>
+        <select th:field="*{estadoMesa}" class="form-select">
+            <option th:each="estado : ${estadoMesa}"
+                th:value="${estado}"
+                th:text="${estado}"></option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary">Actualizar</button>
+    <a href="/mesas/listar" class="btn btn-secondary">Volver</a>
+</form>
+
+</body>
+</html>

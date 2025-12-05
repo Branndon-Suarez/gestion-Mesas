@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Fragmento: navbar -->
+<nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a th:href="@{/}" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/usuarios/listar}" class="nav-link">Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/clientes/listar}" class="nav-link">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/mesas/listar}" class="nav-link">Mesas</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/pedidos/listar}" class="nav-link">Pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/productos/listar}" class="nav-link">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/pagos/listarPagosGenerales}" class="nav-link">Pagos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</html>
