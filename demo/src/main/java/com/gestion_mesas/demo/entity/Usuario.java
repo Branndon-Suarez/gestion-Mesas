@@ -22,6 +22,7 @@ public class Usuario {
     private Rol rol;
 
     public Usuario() {
+        // Constructor requerido por JPA para crear instancias de la entidad.
     }
 
     // getters y setters
