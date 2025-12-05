@@ -30,10 +30,10 @@ public class DetallePago {
     private Double montoPago;
 
     public enum MetodoPago {
-        Efectivo,
-        Tarjeta_Credito,
-        Tarjeta_Debito,
-        Neki
+        EFECTIVO,
+        TARJETA_CREDITO,
+        TARJETA_DEBITO,
+        NEQUI
     }
 
     // Getters y Setters
