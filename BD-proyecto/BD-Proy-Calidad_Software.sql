@@ -18,7 +18,7 @@ CREATE TABLE MESA (
     id_mesa INT AUTO_INCREMENT PRIMARY KEY,
     numero INT NOT NULL UNIQUE,
     capacidad INT NOT NULL,
-    estado ENUM('Libre', 'Ocupada', 'Sucia', 'Reservada') NOT NULL DEFAULT 'Libre'
+    estado ENUM('LIBRE', 'OCUPADA', 'SUCIA', 'RESERVADA') NOT NULL DEFAULT 'LIBRE'
 );
 
 CREATE TABLE PEDIDO (
@@ -28,7 +28,7 @@ CREATE TABLE PEDIDO (
     total DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
     id_mesa INT NOT NULL,
     CONSTRAINT id_mesa FOREIGN KEY (id_mesa) REFERENCES MESA(id_mesa),
-    estado_pago ENUM('Pendiente', 'Pagado', 'Cancelado') NOT NULL DEFAULT 'Pendiente'
+    estado_pago ENUM('PENDIENTE', 'PAGADO', 'CANCELADO') NOT NULL DEFAULT 'PENDIENTE'
 );
 
 CREATE TABLE PRODUCTO (
@@ -66,7 +66,7 @@ CREATE TABLE DETALLE_PAGO (
     id_cliente_fk INT NOT NULL,
     CONSTRAINT id_cliente_fk FOREIGN KEY(id_cliente_fk) REFERENCES CLIENTE(id_cliente),
     fecha_pago DATETIME NOT NULL,
-    metodo_pago ENUM("Efectivo", "Tarjeta Crédito", "Tarjeta Débito", "Neki"),
+    metodo_pago ENUM("EFECTIVO", "TARJETA_CREDITO", "TARJETA_DEBITO", "NEQUI"),
     monto_pago BIGINT NOT NULL
 );
 
