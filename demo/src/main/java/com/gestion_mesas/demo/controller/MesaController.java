@@ -19,6 +19,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/mesas")
 public class MesaController {
+    private static final String REDIRECT_LISTAR = "redirect:/mesas/listar";
     public final MesaService mesaService;
     public final PedidoService pedidoService;
     public MesaController(MesaService mesaService, PedidoService pedidoService) {
@@ -68,7 +69,7 @@ public class MesaController {
 
         mesaService.guardarMesa(mesa);
 
-        return "redirect:/mesas/listar";
+        return REDIRECT_LISTAR;
     }
 
     @GetMapping("/formAct/{id}")
@@ -102,12 +103,12 @@ public class MesaController {
 
         mesaService.guardarMesa(mesaActual);
 
-        return "redirect:/mesas/listar";
+        return REDIRECT_LISTAR;
     }
 
     @PostMapping("/eliminar/{id}")
     public String eliminarMesa(@PathVariable Long id) {
         mesaService.eliminarMesa(id);
-        return "redirect:/mesas/listar";
+        return REDIRECT_LISTAR;
     }
 }

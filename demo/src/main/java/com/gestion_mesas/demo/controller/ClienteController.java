@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
+    private static final String REDIRECT_LISTAR = "redirect:/clientes/listar";
     private final ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
@@ -33,13 +34,13 @@ public class ClienteController {
     public String guardar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult result) {
         if (result.hasErrors()) return "cliente/formGuardar";
         clienteService.guardar(cliente);
-        return "redirect:/clientes/listar";
+        return REDIRECT_LISTAR;
     }
 
     @GetMapping("/formAct/{id}")
     public String formAct(@PathVariable Long id, Model model) {
         Cliente c = clienteService.buscarPorId(id);
-        if (c == null) return "redirect:/clientes/listar";
+        if (c == null) return REDIRECT_LISTAR;
         model.addAttribute("cliente", c);
         return "cliente/formAct";
     }
@@ -48,12 +49,12 @@ public class ClienteController {
     public String actualizar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult result) {
         if (result.hasErrors()) return "cliente/formAct";
         clienteService.guardar(cliente);
-        return "redirect:/clientes/listar";
+        return REDIRECT_LISTAR;
     }
 
     @PostMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
         clienteService.eliminar(id);
-        return "redirect:/clientes/listar";
+        return REDIRECT_LISTAR;
     }
 }

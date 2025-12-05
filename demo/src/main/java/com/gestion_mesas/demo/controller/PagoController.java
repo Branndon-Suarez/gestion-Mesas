@@ -14,6 +14,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/pagos")
 public class PagoController {
+    private static final String REDIRECT_LISTAR_MESAS = "redirect:/mesas/listar";
+    private static final String REDIRECT_LISTAR_PAGOS = "redirect:/pagos/listar/";
+
     private final DetallePagoService detallePagoService;
     private final ClienteService clienteService;
     private final PedidoService pedidoService;
@@ -36,7 +39,7 @@ public class PagoController {
     @GetMapping("/nuevo/{idPedido}")
     public String nuevoPago(@PathVariable Long idPedido, Model model) {
         Pedido pedido = pedidoService.buscarPorId(idPedido);
-        if (pedido == null) return "redirect:/mesas/listar";
+        if (pedido == null) return REDIRECT_LISTAR_MESAS;
 
         DetallePago dp = new DetallePago();
         dp.setPedido(pedido);
@@ -56,13 +59,13 @@ public class PagoController {
         // pago.pedido debe venir con id (th:field en el form)
         detallePagoService.guardarPago(pago);
         Long idPedido = pago.getPedido().getIdPedido();
-        return "redirect:/pagos/listar/" + idPedido;
+        return REDIRECT_LISTAR_PAGOS + idPedido;
     }
 
     @GetMapping("/listar/{idPedido}")
     public String listarPagos(@PathVariable Long idPedido, Model model) {
         Pedido pedido = pedidoService.buscarPorId(idPedido);
-        if (pedido == null) return "redirect:/mesas/listar";
+        if (pedido == null) return REDIRECT_LISTAR_MESAS;
 
         Double totalPagado = detallePagoService.totalPagadoPorPedido(idPedido);
         Double faltante = pedido.getTotal() - totalPagado;
@@ -80,7 +83,7 @@ public class PagoController {
         DetallePago dp = detallePagoService.buscarPorId(idPago);
         Long idPedido = dp != null && dp.getPedido() != null ? dp.getPedido().getIdPedido() : null;
         detallePagoService.eliminarPago(idPago);
-        if (idPedido != null) return "redirect:/pagos/listar/" + idPedido;
-        return "redirect:/mesas/listar";
+        if (idPedido != null) return REDIRECT_LISTAR_PAGOS + idPedido;
+        return REDIRECT_LISTAR_MESAS;
     }
 }
